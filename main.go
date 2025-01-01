@@ -306,6 +306,59 @@ func greetings() (x, y string) {
 	return
 }
 
+// func main() {
+// 	fmt.Print(greetings())
+// }
+
+// Pointers => Referencing & Dereferencing
+// func main() {
+// 	i := 10
+// 	fmt.Printf("%T %v \n", &i, &i)
+// 	fmt.Printf("%T %v \n", *(&i), *(&i))
+// }
+
+// func main() {
+// 	s := "hello"
+// 	var b *string = &s
+// 	fmt.Println(b)
+// 	var a = &s
+// 	fmt.Println(a)
+// 	c := &s
+// 	fmt.Println(c)
+// }
+
+// Dereferencing Pointers
+// func main() {
+// 	s := "hello"
+// 	fmt.Printf("%T %v \n", s, s)
+// 	ps := &s
+// 	*ps = "world"
+// 	fmt.Printf("%T %v \n", s, s)
+// }
+
+// func main() {
+// 	y := [3]int{10, 20, 30}
+// 	fmt.Printf("%v \n", y)
+// 	(*&y)[0] = 100
+// 	fmt.Printf("%v \n", y)
+// }
+
+// func main() {
+// 	var y int
+// 	var ptr *int = &y
+
+// 	*ptr = 0
+// 	fmt.Println(y)
+
+// 	*ptr += 5
+// 	fmt.Println(y)
+
+// }
+
 func main() {
-	fmt.Print(greetings())
+	s := "hello"
+	var ptr *string = &s
+	fmt.Println(s)
+	*ptr += strings.ToUpper(s)
+	fmt.Println(s)
 }
