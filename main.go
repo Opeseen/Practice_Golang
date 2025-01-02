@@ -355,10 +355,68 @@ func greetings() (x, y string) {
 
 // }
 
+// func main() {
+// 	s := "hello"
+// 	var ptr *string = &s
+// 	fmt.Println(s)
+// 	*ptr += strings.ToUpper(s)
+// 	fmt.Println(s)
+// }
+
+// func modify(numbers ...int) {
+// 	for i := range numbers {
+// 		numbers[i] -= 5
+// 	}
+// }
+// func main() {
+// 	arr := []int{10, 20, 30}
+// 	fmt.Println(arr)
+// 	modify(arr...)
+// 	fmt.Println(arr)
+// }
+
+// func modify(numbers [3]int) {
+// 	for i, x := range numbers {
+// 		numbers[i] -= 5
+// 		fmt.Println(i, x)
+// 	}
+// }
+// func main() {
+// 	arr := [3]int{10, 20, 30}
+// 	fmt.Println(arr)
+// 	modify(arr)
+// 	fmt.Println(arr)
+// }
+
+// func modify(numbers *[3]int) {
+// 	for i := range numbers {
+// 		numbers[i] -= 5
+// 	}
+// }
+// func main() {
+// 	arr := [3]int{10, 20, 30}
+// 	fmt.Println(arr)
+// 	modify(arr)
+// 	fmt.Println(arr)
+// }
+
+// func modify(s *string) {
+// 	*s = strings.ToUpper(*s)
+// }
+// func main() {
+// 	s := "hello"
+// 	fmt.Println(s)
+// 	modify(&s)
+// 	fmt.Println(s)
+// }
+
+func modify(s map[string]int) {
+	s["A"] = 100
+}
 func main() {
-	s := "hello"
-	var ptr *string = &s
-	fmt.Println(s)
-	*ptr += strings.ToUpper(s)
-	fmt.Println(s)
+	ascii_codes := map[string]int{}
+	ascii_codes["A"] = 65
+	fmt.Println(ascii_codes)
+	modify(ascii_codes)
+	fmt.Println(ascii_codes)
 }
