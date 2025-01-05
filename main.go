@@ -413,10 +413,223 @@ func greetings() (x, y string) {
 func modify(s map[string]int) {
 	s["A"] = 100
 }
+
+// func main() {
+// 	ascii_codes := map[string]int{}
+// 	ascii_codes["A"] = 65
+// 	fmt.Println(ascii_codes)
+// 	modify(ascii_codes)
+// 	fmt.Println(ascii_codes)
+// }
+
+// STRUCT
+
+type Student struct {
+	name   string
+	rollNo int
+	mark   [3]int
+	grades map[string]int
+}
+
+// func main() {
+// 	var s Student
+//
+// fmt.Printf("%+v", s)
+// }
+
+// func main() {
+// 	st := new(Student)
+// 	fmt.Printf("%+v", st)
+// }
+
+// func main() {
+// 	st := Student{
+// 		name:   "Joe",
+// 		rollNo: 15,
+// 	}
+// 	fmt.Printf("%+v", st)
+// }
+
+// func main() {
+// 	var st Student
+// 	st.name = "Opeyemi"
+// 	st.rollNo = 12
+// 	st.mark = [3]int{10, 20, 15}
+// 	fmt.Printf("%+v", st)
+// }
+
+// Passing Struct to function
+type Circles struct {
+	x      int
+	y      int
+	radius float64
+	area   float64
+}
+
+func calculateArea(c Circles) {
+	const PI float64 = 3.14
+	var area float64
+	area = (PI * c.radius * c.radius)
+	c.area = area
+}
+
+// func main() {
+// 	c := Circles{x: 5, y: 5, radius: 5, area: 0}
+// 	fmt.Printf("%+v \n", c)
+// 	calculateArea(c)
+// 	fmt.Printf("%+v \n", c)
+// }
+
+func calculateArea2(c *Circles) {
+	const PI float64 = 3.14
+	var area float64
+	area = (PI * c.radius * c.radius)
+	(*c).area = area
+}
+
+// func main() {
+// 	c := Circles{x: 5, y: 5, radius: 5, area: 0}
+// 	fmt.Printf("%+v \n", c)
+// 	calculateArea2(&c)
+// 	fmt.Printf("%+v \n", c)
+// }
+
+// Comparing Struct
+type s1 struct {
+	x int
+}
+type s2 struct {
+	x int
+}
+
+// func main() {
+// 	c := s1{x: 5}
+// 	c1 := s2{x: 5}
+// 	if(c == c1){
+// 		fmt.Println('Yes')
+// 	}
+// }
+
+// func main() {
+// 	c := s1{x: 5}
+// 	c1 := s1{x: 6}
+// 	c2 := s1{x: 5}
+
+// 	if c != c1 {
+// 		fmt.Println("c and c1 have different values")
+// 	}
+// 	if c == c2 {
+// 		fmt.Println("c is same as c2")
+// 	}
+// }
+
+// Methods
+type Circle2 struct {
+	radius float64
+	area   float64
+}
+
+type Circle3 struct {
+	radius float64
+	area   float64
+}
+
+func (c *Circle2) calcArea2() {
+	c.area = 3.14 * c.radius * c.radius
+}
+
+// func main() {
+// 	c := Circle2{radius: 5}
+// 	c.calcArea2()
+// 	fmt.Printf("%+v", c)
+// }
+
+func (c Circle3) calcArea3() {
+	c.area = 3.14 * c.radius * c.radius
+}
+
+// func main() {
+// 	c := Circle3{radius: 5}
+// 	c.calcArea3()
+// 	fmt.Printf("%+v", c)
+// }
+
+// Method Sets
+
+type Student2 struct {
+	name   string
+	grades []int
+}
+
+func (s *Student2) displayName() {
+	fmt.Println(s.name)
+}
+
+func (s *Student2) calculatePercentage() float64 {
+	sum := 0
+	for _, v := range s.grades {
+		sum += v
+	}
+	return float64(sum*100) / float64(len(s.grades)*100)
+}
+
+// func main() {
+// 	s := Student2{name: "Joe", grades: []int{90, 75, 80}}
+// 	s.displayName()
+// 	fmt.Printf("%.2f%%", s.calculatePercentage())
+// }
+
+type Movie struct {
+	name    string
+	summary string
+	rating  float32
+}
+
+func (m Movie) getSummary() {
+	m.summary = "summary"
+}
+
+func (m *Movie) increaseRating() {
+	m.rating += 1
+}
+
+// func main() {
+// 	mov := Movie{"xyz", "", 2.1}
+// 	fmt.Printf("%+v", mov)
+// 	mov.increaseRating()
+// 	mov.getSummary()
+// 	fmt.Printf("%+v", mov)
+// }
+
+type Rectangle struct {
+	length  int
+	breadth int
+}
+
+func (r Rectangle) area() int {
+	return r.length * r.breadth
+}
+
+// func main() {
+// 	r := Rectangle{breadth: 10, length: 5}
+// 	fmt.Println(r.area())
+// 	fmt.Println(r)
+// }
+
+type Employee struct {
+	eid int
+	id  int
+}
+
+func (e Employee) get_id() int {
+	return e.eid + 10
+}
+
 func main() {
-	ascii_codes := map[string]int{}
-	ascii_codes["A"] = 65
-	fmt.Println(ascii_codes)
-	modify(ascii_codes)
-	fmt.Println(ascii_codes)
+	employees := make([]Employee, 5)
+	for i := range employees {
+		employees[i] = Employee{eid: i}
+		employees[i].id = employees[i].get_id()
+		fmt.Printf("%+v\n", employees[i])
+	}
 }
