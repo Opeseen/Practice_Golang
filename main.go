@@ -625,11 +625,56 @@ func (e Employee) get_id() int {
 	return e.eid + 10
 }
 
+// func main() {
+// 	employees := make([]Employee, 5)
+// 	for i := range employees {
+// 		employees[i] = Employee{eid: i}
+// 		employees[i].id = employees[i].get_id()
+// 		fmt.Printf("%+v\n", employees[i])
+// 	}
+// }
+
+// Interfaces
+
+type Shape interface {
+	area() float64
+	perimeter() float64
+}
+
+type square struct {
+	side float64
+}
+
+func (s square) area() float64 {
+	return s.side * s.side
+}
+
+func (s square) perimeter() float64 {
+	return 4 * s.side
+}
+
+type rect struct {
+	length, breadth float64
+}
+
+func (r rect) area() float64 {
+	return r.length * r.breadth
+}
+
+func (r rect) perimeter() float64 {
+	return 2*r.length + 2*r.breadth
+}
+
+func printData(s Shape) {
+	fmt.Println("Shape: ", s)
+	fmt.Println("Area: ", s.area())
+	fmt.Println("Perimeter: ", s.perimeter())
+	fmt.Println()
+}
+
 func main() {
-	employees := make([]Employee, 5)
-	for i := range employees {
-		employees[i] = Employee{eid: i}
-		employees[i].id = employees[i].get_id()
-		fmt.Printf("%+v\n", employees[i])
-	}
+	r := rect{length: 3, breadth: 4}
+	c := square{side: 5}
+	printData(r)
+	printData(c)
 }
