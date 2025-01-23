@@ -73,17 +73,29 @@ var name2 string = "Mike"
 // 	fmt.Print(age, code)
 // }
 
-func main() {
-	var i string = "Ope"
-	const j int = 26
-	const b2 = true
-	const num uint = 43
+// func main() {
+// 	var i string = "Ope"
+// 	const j int = 26
+// 	const b2 = true
+// 	const num uint = 43
 
-	fmt.Printf("I haa a value of %v and type %T", i, i)
-	fmt.Println()
-	fmt.Printf("J has a value of %v and type %T", j, j)
-	fmt.Println()
-	fmt.Printf("b2 has a value of %v and a tye %T", b2, b2)
-	fmt.Println()
-	fmt.Println(num)
+// 	fmt.Printf("I haa a value of %v and type %T", i, i)
+// 	fmt.Println()
+// 	fmt.Printf("J has a value of %v and type %T", j, j)
+// 	fmt.Println()
+// 	fmt.Printf("b2 has a value of %v and a tye %T", b2, b2)
+// 	fmt.Println()
+// 	fmt.Println(num)
+// }
+
+func main() {
+	var arr1 = [3]int{1, 2, 3}
+	arr2 := [2]int{4, 5}
+	var arr3 = [...]int{6, 7, 8}
+	arr4 := [...]int{9, 10}
+
+	fmt.Println(arr1)
+	fmt.Println(arr2)
+	fmt.Println(arr3)
+	fmt.Println(arr4)
 }
