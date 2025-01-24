@@ -93,9 +93,15 @@ func main() {
 	arr2 := [2]int{4, 5}
 	var arr3 = [...]int{6, 7, 8}
 	arr4 := [...]int{9, 10}
+	arr5 := [5]int{1: 10, 2: 40}
 
 	fmt.Println(arr1)
 	fmt.Println(arr2)
 	fmt.Println(arr3)
 	fmt.Println(arr4)
+	fmt.Println(arr4[1])
+	arr4[1] = 30
+	fmt.Println(arr4)
+	fmt.Println(arr5)
+	fmt.Println(len(arr5))
 }
