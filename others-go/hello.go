@@ -88,20 +88,56 @@ var name2 string = "Mike"
 // 	fmt.Println(num)
 // }
 
-func main() {
-	var arr1 = [3]int{1, 2, 3}
-	arr2 := [2]int{4, 5}
-	var arr3 = [...]int{6, 7, 8}
-	arr4 := [...]int{9, 10}
-	arr5 := [5]int{1: 10, 2: 40}
+// func main() {
+// 	var arr1 = [3]int{1, 2, 3}
+// 	arr2 := [2]int{4, 5}
+// 	var arr3 = [...]int{6, 7, 8}
+// 	arr4 := [...]int{9, 10}
+// 	arr5 := [5]int{1: 10, 2: 40}
 
-	fmt.Println(arr1)
-	fmt.Println(arr2)
-	fmt.Println(arr3)
-	fmt.Println(arr4)
-	fmt.Println(arr4[1])
-	arr4[1] = 30
-	fmt.Println(arr4)
-	fmt.Println(arr5)
-	fmt.Println(len(arr5))
+// 	fmt.Println(arr1)
+// 	fmt.Println(arr2)
+// 	fmt.Println(arr3)
+// 	fmt.Println(arr4)
+// 	fmt.Println(arr4[1])
+// 	arr4[1] = 30
+// 	fmt.Println(arr4)
+// 	fmt.Println(arr5)
+// 	fmt.Println(len(arr5))
+// }
+
+// Creating Slice with data Type Values
+// func main() {
+// 	mySlice1 := []int{}
+// 	mySlice2 := []string{"GO", "Slices", "Are", "Powerful"}
+// 	fmt.Println(mySlice1)
+// 	fmt.Println(len(mySlice1))
+// 	fmt.Println(cap(mySlice1))
+
+// 	fmt.Println(mySlice2)
+// 	fmt.Println(len(mySlice2))
+// 	fmt.Println(cap(mySlice2))
+// }
+
+// Create a Slice From an Array
+// func main() {
+// 	myArraay := [5]int{1, 2, 3, 4, 5}
+// 	mySlice := myArraay[2:4]
+
+// 	fmt.Printf("mySlice = %v\n", mySlice)
+// 	fmt.Printf("length = %d\n", len(mySlice))
+// 	fmt.Printf("Capacity = %d\n", cap(mySlice))
+// }
+
+// Create a Slice With The make() Function
+func main() {
+	mySlice := make([]int, 5, 10)
+	mySlice2 := make([]int, 5)
+	fmt.Printf("mySlice = %v\n", mySlice)
+	fmt.Printf("length = %d\n", len(mySlice))
+	fmt.Printf("Capacity = %d\n", cap(mySlice))
+	fmt.Println()
+	fmt.Printf("mySlice2 = %v\n", mySlice2)
+	fmt.Printf("length = %d\n", len(mySlice2))
+	fmt.Printf("Capacity = %d\n", cap(mySlice2))
 }
