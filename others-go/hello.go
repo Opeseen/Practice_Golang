@@ -130,14 +130,50 @@ var name2 string = "Mike"
 // }
 
 // Create a Slice With The make() Function
+// func main() {
+// 	mySlice := make([]int, 5, 10)
+// 	mySlice2 := make([]int, 5)
+// 	mySlice2 = append(mySlice2, 1, 2, 3)
+// 	fmt.Printf("mySlice = %v\n", mySlice)
+// 	fmt.Printf("length = %d\n", len(mySlice))
+// 	fmt.Printf("Capacity = %d\n", cap(mySlice))
+// 	fmt.Println()
+// 	fmt.Printf("mySlice2 = %v\n", mySlice2)
+// 	fmt.Printf("length = %d\n", len(mySlice2))
+// 	fmt.Printf("Capacity = %d\n", cap(mySlice2))
+// 	fmt.Printf("mySlice2Append = %v\n", mySlice2)
+// }
+
+// func main() {
+// 	mySlice := [3]int{1, 4, 6}
+// 	fmt.Println(mySlice[1])
+// 	mySlice[1] = 9
+// 	fmt.Println(mySlice[1])
+// }
+
+// func main() {
+// 	mySlice := []int{1, 2, 3}
+// 	mySlice2 := []int{4, 5, 6}
+
+// 	mySlice3 := append(mySlice, mySlice2...)
+// 	fmt.Println(mySlice3)
+// 	fmt.Printf("Capacity %d\n", cap(mySlice3))
+// }
+
 func main() {
-	mySlice := make([]int, 5, 10)
-	mySlice2 := make([]int, 5)
-	fmt.Printf("mySlice = %v\n", mySlice)
-	fmt.Printf("length = %d\n", len(mySlice))
-	fmt.Printf("Capacity = %d\n", cap(mySlice))
+	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
+	// Original slice
+	fmt.Printf("numbers = %v\n", numbers)
+	fmt.Printf("length = %d\n", len(numbers))
+	fmt.Printf("capacity = %d\n", cap(numbers))
 	fmt.Println()
-	fmt.Printf("mySlice2 = %v\n", mySlice2)
-	fmt.Printf("length = %d\n", len(mySlice2))
-	fmt.Printf("Capacity = %d\n", cap(mySlice2))
+
+	// Create copy with only needed numbers
+	neededNumbers := numbers[:len(numbers)-10]
+	neededNumbers2 := numbers[5:]
+	numberCopy := make([]int, len(neededNumbers))
+	copy(numberCopy, neededNumbers)
+	fmt.Println(neededNumbers)
+	fmt.Println(neededNumbers2)
+	fmt.Println(numberCopy)
 }
