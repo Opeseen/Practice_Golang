@@ -1,6 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
+
+func calculate(a int, b int) (results []float64) {
+	results = append(results, float64(a+b), float64(a-b), float64(a*b), float64(a/b))
+	return results
+}
+
+// func main() {
+// 	fmt.Println(calculate(20, 10))
+// 	fmt.Println(calculate(700, 70))
+// }
 
 type Item struct {
 	Name  string
@@ -42,18 +55,92 @@ func updatePages(book *Book, pages int) {
 	book.Pages = pages
 }
 
+// func main() {
+// 	book1 := &Book{Title: "The Great Gatsby", Author: "F. Scott Fitzgerald", Pages: 180}
+// 	book2 := &Book{Title: "To Kill a Mockingbird", Author: "Harper Lee", Pages: 281}
+// 	book3 := &Book{Title: "Pride and Prejudice", Author: "Jane Austen", Pages: 279}
+
+// 	updatePages(book1, 210)
+// 	fmt.Println(book1)
+
+// 	updatePages(book2, 250)
+// 	fmt.Println(book2)
+
+// 	updatePages(book3, 295)
+// 	fmt.Println(book3)
+
+// }
+
+type Expense struct {
+	Name   string
+	Amount float64
+	Date   string
+}
+
+func Total(expenses []Expense) float64 {
+	var total float64
+	for _, expense := range expenses {
+		total += expense.Amount
+	}
+	return total
+}
+
+func (e Expense) getName() string {
+	return e.Name
+}
+
+// func main() {
+// 	expenses := []Expense{
+// 		{"Grocery", 50.0, "2022-01-01"},
+// 		{"Gas", 30.0, "2022-01-02"},
+// 		{"Restaurant", 40.0, "2022-01-03"},
+// 	}
+
+// 	fmt.Println(Total(expenses))
+// 	fmt.Println(expenses[2].getName())
+// }
+
+type Product struct {
+	name     string
+	quantity int
+	price    float64
+}
+
+func printName(p Product) {
+	fmt.Println(p.name)
+}
+
+func printQuantity(p Product) {
+	fmt.Println(p.quantity)
+}
+
+func printPrice(p Product) {
+	fmt.Println(p.price)
+}
+
+// func main() {
+// 	var p Product
+// 	p.name = "Chair"
+// 	p.quantity = 5
+// 	p.price = 700
+
+// 	fmt.Println("Product details:")
+// 	printName(p)
+// 	defer printPrice(p)
+// 	printQuantity(p)
+// }
+
+func wordFrequency(text string) map[string]int {
+	words := strings.Fields(text)
+	frequency := make(map[string]int)
+	for _, word := range words {
+		frequency[word]++
+	}
+	return frequency
+}
+
 func main() {
-	book1 := &Book{Title: "The Great Gatsby", Author: "F. Scott Fitzgerald", Pages: 180}
-	book2 := &Book{Title: "To Kill a Mockingbird", Author: "Harper Lee", Pages: 281}
-	book3 := &Book{Title: "Pride and Prejudice", Author: "Jane Austen", Pages: 279}
-
-	updatePages(book1, 210)
-	fmt.Println(book1)
-
-	updatePages(book2, 250)
-	fmt.Println(book2)
-
-	updatePages(book3, 295)
-	fmt.Println(book3)
+	text := "The quick brown fox jumps over the lazy dog"
+	fmt.Println(wordFrequency(text))
 
 }
