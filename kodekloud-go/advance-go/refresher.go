@@ -139,8 +139,8 @@ func wordFrequency(text string) map[string]int {
 	return frequency
 }
 
-func main() {
-	text := "The quick brown fox jumps over the lazy dog"
-	fmt.Println(wordFrequency(text))
+// func main() {
+// 	text := "The quick brown fox jumps over the lazy dog"
+// 	fmt.Println(wordFrequency(text))
 
-}
+// }
