@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// 01
 func calculateSquare(number int) {
 	time.Sleep(1 * time.Second)
 	fmt.Println(number * number)
@@ -20,11 +21,8 @@ func calculateSquare(number int) {
 // 	fmt.Println("Function took: ", elapsed)
 // }
 
-func main() {
-	go start()
-	time.Sleep(1 * time.Second)
-}
-
+// -------------------------------------------------------
+// 02
 func start() {
 	go process()
 	fmt.Println("In Start")
@@ -33,3 +31,19 @@ func start() {
 func process() {
 	fmt.Println("In Process")
 }
+
+// func main() {
+// 	go start()
+// 	time.Sleep(1 * time.Second)
+// }
+
+// 03................................ Anonymous function
+
+// func main() {
+// 	go func() {
+// 		fmt.Println("In anonymous method")
+// 	}()
+// 	time.Sleep(1 * time.Second)
+// }
+
+// 04.................................. GO routine Schedular
