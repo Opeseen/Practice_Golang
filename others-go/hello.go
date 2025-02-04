@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 // func main() {
 // 	fmt.Print("Hello World")
 // }
@@ -160,20 +158,20 @@ var name2 string = "Mike"
 // 	fmt.Printf("Capacity %d\n", cap(mySlice3))
 // }
 
-func main() {
-	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
-	// Original slice
-	fmt.Printf("numbers = %v\n", numbers)
-	fmt.Printf("length = %d\n", len(numbers))
-	fmt.Printf("capacity = %d\n", cap(numbers))
-	fmt.Println()
+// func main() {
+// 	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
+// 	// Original slice
+// 	fmt.Printf("numbers = %v\n", numbers)
+// 	fmt.Printf("length = %d\n", len(numbers))
+// 	fmt.Printf("capacity = %d\n", cap(numbers))
+// 	fmt.Println()
 
-	// Create copy with only needed numbers
-	neededNumbers := numbers[:len(numbers)-10]
-	neededNumbers2 := numbers[5:]
-	numberCopy := make([]int, len(neededNumbers))
-	copy(numberCopy, neededNumbers)
-	fmt.Println(neededNumbers)
-	fmt.Println(neededNumbers2)
-	fmt.Println(numberCopy)
-}
+// 	// Create copy with only needed numbers
+// 	neededNumbers := numbers[:len(numbers)-10]
+// 	neededNumbers2 := numbers[5:]
+// 	numberCopy := make([]int, len(neededNumbers))
+// 	copy(numberCopy, neededNumbers)
+// 	fmt.Println(neededNumbers)
+// 	fmt.Println(neededNumbers2)
+// 	fmt.Println(numberCopy)
+// }

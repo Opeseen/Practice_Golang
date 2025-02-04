@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -47,3 +48,20 @@ func process() {
 // }
 
 // 04.................................. GO routine Schedular
+func calculateSquare2(i int, wg *sync.WaitGroup) {
+	fmt.Println(i * i)
+	wg.Done()
+}
+
+// func main() {
+// 	var wg sync.WaitGroup
+// 	start := time.Now()
+// 	wg.Add(10)
+
+// 	for i := 0; i < 10; i++ {
+// 		go calculateSquare2(i, &wg)
+// 	}
+// 	elapsed := time.Since(start)
+// 	wg.Wait()
+// 	fmt.Println("Function took ", elapsed)
+// }
