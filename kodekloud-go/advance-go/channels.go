@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 // func main() {
@@ -30,28 +31,28 @@ func ping(c chan string) {
 	close(c)
 }
 
-func main() {
-	linkChannel := make(chan string)
-	go ping(linkChannel)
+// func main() {
+// 	linkChannel := make(chan string)
+// 	go ping(linkChannel)
 
-	link1 := <-linkChannel
-	link2 := <-linkChannel
-	link3 := <-linkChannel
+// 	link1 := <-linkChannel
+// 	link2 := <-linkChannel
+// 	link3 := <-linkChannel
 
-	fmt.Println(link1)
-	fmt.Println(link2)
-	fmt.Println(link3)
+// 	fmt.Println(link1)
+// 	fmt.Println(link2)
+// 	fmt.Println(link3)
 
-	for {
-		_, ok := <-linkChannel
-		if ok {
-			fmt.Println("Channel is Open")
-		} else {
-			fmt.Println("Channel is Closed")
-			break
-		}
-	}
-}
+// 	for {
+// 		_, ok := <-linkChannel
+// 		if ok {
+// 			fmt.Println("Channel is Open")
+// 		} else {
+// 			fmt.Println("Channel is Closed")
+// 			break
+// 		}
+// 	}
+// }
 
 // .........................Buffered Channel
 func sell(ch chan int, wg *sync.WaitGroup) {
@@ -115,3 +116,32 @@ func buy(ch chan int, wg *sync.WaitGroup) {
 // 		fmt.Println(val)
 // 	}
 // }
+
+// ...................................Select Statement
+func goOne(ch1 chan string) {
+	ch1 <- "Channel-1"
+}
+
+func goTwo(ch2 chan string) {
+	ch2 <- "Channel-2"
+}
+
+func main() {
+	ch1 := make(chan string)
+	ch2 := make(chan string)
+
+	go goOne(ch1)
+	go goTwo(ch2)
+
+	select {
+	case val1 := <-ch1:
+		fmt.Println(val1)
+		break
+	case val2 := <-ch2:
+		fmt.Println(val2)
+		break
+	default:
+		fmt.Println("Executed default")
+	}
+	time.Sleep(3 * time.Second)
+}
