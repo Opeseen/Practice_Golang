@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"sync"
-	"time"
 )
 
 // func main() {
@@ -126,22 +125,22 @@ func goTwo(ch2 chan string) {
 	ch2 <- "Channel-2"
 }
 
-func main() {
-	ch1 := make(chan string)
-	ch2 := make(chan string)
+// func main() {
+// 	ch1 := make(chan string)
+// 	ch2 := make(chan string)
 
-	go goOne(ch1)
-	go goTwo(ch2)
+// 	go goOne(ch1)
+// 	go goTwo(ch2)
 
-	select {
-	case val1 := <-ch1:
-		fmt.Println(val1)
-		break
-	case val2 := <-ch2:
-		fmt.Println(val2)
-		break
-	default:
-		fmt.Println("Executed default")
-	}
-	time.Sleep(3 * time.Second)
-}
+// 	select {
+// 	case val1 := <-ch1:
+// 		fmt.Println(val1)
+// 		break
+// 	case val2 := <-ch2:
+// 		fmt.Println(val2)
+// 		break
+// 	default:
+// 		fmt.Println("Executed default")
+// 	}
+// 	time.Sleep(3 * time.Second)
+// }
