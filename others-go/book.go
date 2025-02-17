@@ -58,16 +58,16 @@ func retrieve(url string, wg *sync.WaitGroup) {
 // 	time.Sleep(6 * time.Second)
 // }
 
-func main() {
-	// Creating a buffered channel with a capacity of 2
-	dataChannel := make(chan int, 2)
+// func main() {
+// 	// Creating a buffered channel with a capacity of 2
+// 	dataChannel := make(chan int, 2)
 
-	go producer(dataChannel)
-	go consumer(dataChannel)
+// 	go producer(dataChannel)
+// 	go consumer(dataChannel)
 
-	// Simulate work for 1 second before exiting
-	time.Sleep(6 * time.Second)
-}
+// 	// Simulate work for 1 second before exiting
+// 	time.Sleep(6 * time.Second)
+// }
 
 // producer sends data to the channel
 func producer(ch chan int) {
