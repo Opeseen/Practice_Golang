@@ -1,10 +1,5 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
-
 // .............................FilePath
 // func main() {
 // 	path := filepath.Join("Dir1", "Dir2", "Dir3", "test.txt")
@@ -53,15 +48,15 @@ import (
 // 	fmt.Println(string(fileText))
 // }
 
-func main() {
-	file, err := os.OpenFile("./file.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0600)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer file.Close()
-	_, err = file.WriteString("Hope you had a good day..? \n")
-	if err != nil {
-		fmt.Println(err)
-	}
-}
+// func main() {
+// 	file, err := os.OpenFile("./file.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0600)
+// 	if err != nil {
+// 		fmt.Println(err)
+// 		return
+// 	}
+// 	defer file.Close()
+// 	_, err = file.WriteString("Hope you had a good day..? \n")
+// 	if err != nil {
+// 		fmt.Println(err)
+// 	}
+// }
