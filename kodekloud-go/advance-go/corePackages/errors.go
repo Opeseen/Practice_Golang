@@ -21,9 +21,9 @@ func checkError(err error) {
 	fmt.Println("Process ran successfully")
 }
 
-func main() {
-	err := process(3)
-	checkError(err)
-	err = process(2)
-	checkError(err)
-}
+// func main() {
+// 	err := process(3)
+// 	checkError(err)
+// 	err = process(2)
+// 	checkError(err)
+// }
