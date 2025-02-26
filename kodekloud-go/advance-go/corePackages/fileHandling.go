@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"path/filepath"
+)
+
 // .............................FilePath
 // func main() {
 // 	path := filepath.Join("Dir1", "Dir2", "Dir3", "test.txt")
@@ -60,3 +65,10 @@ package main
 // 		fmt.Println(err)
 // 	}
 // }
+
+func main() {
+	fmt.Println(filepath.Join("dir1", "../dir1/dir2", "dir3", "temp.txt"))
+	fmt.Println(filepath.Join("dir1", "dir2", "dir3", "temp.txt"))
+	fmt.Println(filepath.Join("dir2", "../dir1/dir2", "dir3", "temp.txt"))
+	fmt.Println(filepath.Join("dir2", "../dir1/dir2//", "dir3", "../dir3/temp.txt"))
+}
