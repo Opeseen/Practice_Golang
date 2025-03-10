@@ -1,0 +1,28 @@
+
+type api struct {
+	addr string
+}
+
+func (s *api) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case http.MethodGet:
+		switch r.URL.Path {
+		case "/":
+			w.Write([]byte("GRT method"))
+		case "/index":
+			w.Write([]byte("GET index"))
+			return
+		}
+	case http.MethodPost:
+		w.Write([]byte("POSt method"))
+		return
+	}
+}
+
+func (a *api) getUsersHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Returned user"))
+}
+
+func (a *api) createUsersHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Created user"))
+}
