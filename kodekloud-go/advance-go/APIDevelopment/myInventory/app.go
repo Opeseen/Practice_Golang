@@ -24,7 +24,7 @@ func checkError(err error) {
 	}
 }
 
-func (app *App) Initialize() error {
+func (app *App) Initialize(DBUser string, DBPass string, DBName string) error {
 	connectionString := fmt.Sprintf("%v:%v@tcp(127.0.0.1:3306)/%v", DBUser, DBPass, DBName)
 	// Open mysql connection
 	var err error
