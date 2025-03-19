@@ -35,6 +35,7 @@ func getProds(db *sql.DB) ([]Product, error) {
 func (p *Product) getProd(db *sql.DB) error {
 	query := fmt.Sprintf("SELECT name, quantity, price FROM products WHERE id=%v", p.ID)
 	row := db.QueryRow(query)
+
 	err := row.Scan(&p.Name, &p.Quantity, &p.Price)
 	if err != nil {
 		return err
