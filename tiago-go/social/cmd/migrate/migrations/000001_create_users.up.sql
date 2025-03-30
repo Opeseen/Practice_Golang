@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS users(
   created_at timestamp(0) with time zone NOT NULL DEFAULT NOW()
 );
 
-INSERT INTO users (email, username, password) VALUES('Opeyemi5055@yahoo.com',
-  'admin', 'adminuser');
+-- INSERT INTO users (email, username, password) VALUES('Opeyemi5055@yahoo.com',
+--   'admin', 'adminuser');

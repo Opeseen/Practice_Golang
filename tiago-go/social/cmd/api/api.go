@@ -1,18 +1,19 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/ope/social/internal/store"
+	"go.uber.org/zap"
 )
 
 type application struct {
 	config config
 	store  store.Storage
+	logger *zap.SugaredLogger
 }
 
 // Create a config struct
@@ -20,6 +21,11 @@ type config struct {
 	addr string
 	db   dbConfig
 	env  string
+	mail mailConfig
+}
+
+type mailConfig struct {
+	exp time.Duration
 }
 
 // create the db configuration struct
@@ -46,15 +52,41 @@ func (app *application) mount() http.Handler {
 	r.Use(middleware.Timeout(60 * time.Second))
 
 	r.Route("/v1", func(r chi.Router) {
+		// health route
 		r.Get("/health", app.healthCheckHandler)
-
+		// posts route
 		r.Route("/posts", func(r chi.Router) {
 			r.Post("/", app.createPostHandler)
 
 			r.Route("/{postID}", func(r chi.Router) {
+				r.Use(app.postContextMiddleware) // middleware to get the post
 				r.Get("/", app.getPostHandler)
+				r.Delete("/", app.deletePostHandler)
+				r.Patch("/", app.updatePostHandler)
 			})
 		})
+		// users route
+		r.Route("/users", func(r chi.Router) {
+			r.Put("/activation/{token}", app.activateUserHandler)
+
+			r.Route("/{userID}", func(r chi.Router) {
+				r.Use(app.userContextMiddleware) // middleware to get the user
+				r.Get("/", app.getUserHandler)
+
+				r.Put("/follow", app.followUserHandler)
+				r.Put("/unfollow", app.unfollowUserHandler)
+			})
+
+			r.Group(func(r chi.Router) {
+				r.Get("/feed", app.getUserFeedHandler)
+			})
+
+		})
+		// public routes
+		r.Route("/authentication", func(r chi.Router) {
+			r.Post("/user", app.registerUserHandler)
+		})
+
 	})
 	return r
 }
@@ -67,7 +99,7 @@ func (app *application) run(mux http.Handler) error {
 		ReadTimeout:  time.Second * 10,
 		IdleTimeout:  time.Minute,
 	}
-	log.Printf("Server has started at %s", app.config.addr)
+	app.logger.Infow("Server has started at", "addr", app.config.addr, "env", app.config.env)
 
 	return srv.ListenAndServe()
 

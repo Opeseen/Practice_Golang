@@ -2,11 +2,13 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"github.com/joho/godotenv"
 	"github.com/ope/social/internal/db"
 	"github.com/ope/social/internal/env"
 	"github.com/ope/social/internal/store"
+	"go.uber.org/zap"
 )
 
 const version = "0.0.1"
@@ -27,8 +29,19 @@ func main() {
 			maxIdleTime:  env.GetString("DB_MAX_IDLE_TIME", "15m"),
 		},
 		env: env.GetString("ENV", "dev"),
+		mail: mailConfig{
+			exp: time.Hour * 24 * 3, // 3days
+		},
 	}
 
+	// Zap Logger
+	zapConfig := zap.NewDevelopmentConfig()
+	// Disable stack trace for error logs
+	zapConfig.DisableStacktrace = true
+	logger := zap.Must(zapConfig.Build()).Sugar()
+	defer logger.Sync()
+
+	// Database
 	db, err := db.New(
 		cfg.db.addr,
 		cfg.db.maxOpenConns,
@@ -36,19 +49,20 @@ func main() {
 		cfg.db.maxIdleTime,
 	)
 	if err != nil {
-		log.Panic(err)
+		logger.Fatal(err)
 	}
 
 	// close the db connection
 	defer db.Close()
-	log.Println("Database connection pool established")
+	logger.Info("Database connection pool established")
 	store := store.NewStorage(db)
 
 	app := &application{
 		config: cfg,
 		store:  store,
+		logger: logger,
 	}
 
 	mux := app.mount()
-	log.Fatal(app.run(mux))
+	logger.Fatal(app.run(mux))
 }
