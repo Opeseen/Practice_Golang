@@ -1,11 +1,14 @@
 package main
 
 import (
+	"context"
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"net/http"
 
 	"github.com/google/uuid"
+	"github.com/ope/social/internal/mailer"
 	"github.com/ope/social/internal/store"
 )
 
@@ -55,7 +58,7 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 	// convert the hash to a string
 	hashToken := hex.EncodeToString(hash[:])
 
-	// store the user
+	// Create the new user
 	err := app.store.Users.CreateAndInvite(ctx, user, hashToken, app.config.mail.exp)
 	if err != nil {
 		switch err {
@@ -74,10 +77,39 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 		Token: plainToken,
 	}
 
-	// send mail
-
-	// return the json response
+	// Return JSON response immediately
 	if err := app.jsonResponse(w, http.StatusCreated, userWithToken); err != nil {
 		app.internalServerError(w, r, err)
+		return
 	}
+
+	// ---- Start sending email notification asynchronously to the user  ----
+	go func(user *store.User, plainToken string) {
+		activationURL := fmt.Sprintf("%s/confirm/%s", app.config.frontendURL, plainToken)
+
+		isProdEnv := app.config.env == "production"
+		vars := struct {
+			Username      string
+			ActivationURL string
+		}{
+			Username:      user.Username,
+			ActivationURL: activationURL,
+		}
+
+		// Send mail
+		status, err := app.mailer.Send(mailer.UserWelcomeTemplate, user.Username, user.Email, vars, !isProdEnv)
+		if err != nil {
+			app.logger.Errorw("error sending welcome email", "error", err)
+
+			// create another background context
+			bgCtx := context.Background()
+			// Rollback user creation if email fails (SAGA pattern)
+			if err := app.store.Users.Delete(bgCtx, user.ID); err != nil {
+				app.logger.Errorw("error deleting user", "error", err)
+			}
+			return
+		}
+
+		app.logger.Infow("Email sent", "status code", status)
+	}(user, plainToken)
 }

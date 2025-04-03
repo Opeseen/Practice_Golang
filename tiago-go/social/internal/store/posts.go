@@ -31,7 +31,6 @@ type PostStore struct {
 
 func (s *PostStore) GetUserFeed(ctx context.Context, userID int64, fq PaginatedFeedQuery) ([]PostWithMetadata, error) {
 
-	// f.user_id = $1 OR p.user_id = AND
 	query := `
 	SELECT p.id, p.user_id, p.title, p.content, p.created_at, p.tags, u.username,
 	COUNT(c.id) AS comments_count

@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/ope/social/internal/mailer"
 	"github.com/ope/social/internal/store"
 	"go.uber.org/zap"
 )
@@ -14,18 +15,28 @@ type application struct {
 	config config
 	store  store.Storage
 	logger *zap.SugaredLogger
+	mailer mailer.Client
 }
 
 // Create a config struct
 type config struct {
-	addr string
-	db   dbConfig
-	env  string
-	mail mailConfig
+	addr        string
+	db          dbConfig
+	env         string
+	mail        mailConfig
+	frontendURL string
 }
 
+// mail config
 type mailConfig struct {
-	exp time.Duration
+	exp       time.Duration
+	mailTrap  mailTrapConfig
+	fromEmail string
+}
+
+type mailTrapConfig struct {
+	apiKey      string
+	apiUsername string
 }
 
 // create the db configuration struct
