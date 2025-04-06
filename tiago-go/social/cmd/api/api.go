@@ -25,6 +25,16 @@ type config struct {
 	env         string
 	mail        mailConfig
 	frontendURL string
+	auth        authConfig
+}
+
+type authConfig struct {
+	basic basicConfig
+}
+
+type basicConfig struct {
+	user string
+	pass string
 }
 
 // mail config
@@ -64,7 +74,7 @@ func (app *application) mount() http.Handler {
 
 	r.Route("/v1", func(r chi.Router) {
 		// health route
-		r.Get("/health", app.healthCheckHandler)
+		r.With(app.BasicAuthMiddleware()).Get("/health", app.healthCheckHandler)
 		// posts route
 		r.Route("/posts", func(r chi.Router) {
 			r.Post("/", app.createPostHandler)

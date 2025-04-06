@@ -43,7 +43,6 @@ func (app *application) getUserHandler(w http.ResponseWriter, r *http.Request) {
 		app.internalServerError(w, r, err)
 	}
 }
-
 func (app *application) followUserHandler(w http.ResponseWriter, r *http.Request) {
 	followerUser := getUserFromContext(r)
 

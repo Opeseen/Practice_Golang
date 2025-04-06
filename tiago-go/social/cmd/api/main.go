@@ -39,6 +39,12 @@ func main() {
 				apiUsername: env.GetString("MAILTRAP_USERNAME", ""),
 			},
 		},
+		auth: authConfig{
+			basic: basicConfig{
+				user: env.GetString("AUTH_BASIC_USER", "admin"),
+				pass: env.GetString("AUTH_BASIC_PASS", "admin1234"),
+			},
+		},
 	}
 
 	// Zap Logger
